@@ -15,6 +15,10 @@ app.get('/params/:name', (req, res)=> {
     res.send(req.params);
 });
 
+app.post('/header', (req, res)=> {
+    res.send(req.get('name'));
+})
+
 app.listen(3000, ()=> {
     console.log('Example app listening on port 3000!');
 });

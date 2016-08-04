@@ -5,8 +5,8 @@
 const supertest = require('supertest');
 const app = require('../src/server');
 const request = supertest(app);
-describe('get /query', function () {
-    it('should get parameter by query', function (done) {
+describe('get /query', ()=> {
+    it('should get parameter by query', (done) => {
         request
             .get('/query')
             .query({name: 'Tom'})
@@ -21,11 +21,27 @@ describe('get /query', function () {
     });
 });
 
-describe('get /params', function () {
-    it('should get parameter by params', function (done) {
+describe('get /params', ()=> {
+    it('should get parameter by params', (done)=> {
         request
             .get('/params/Tom')
             .expect({name: 'Tom'})
+            .end((err, res)=> {
+                if (err) {
+                    done.fail(err);
+                } else {
+                    done();
+                }
+            });
+    });
+});
+
+describe('post /header', ()=> {
+    it('should get parameter by header', (done)=> {
+        request
+            .post('/header')
+            .set({name: 'jan'})
+            .expect('jan')
             .end((err, res)=> {
                 if (err) {
                     done.fail(err);
