@@ -23,6 +23,10 @@ app.post('/user', (req, res)=> {
     res.send(req.body.name);
 });
 
+app.post('/json', (req, res)=> {
+    res.send(req.body);
+});
+
 app.listen(3000, ()=> {
     console.log('Example app listening on port 3000!');
 });

@@ -53,7 +53,7 @@ describe('post /header', ()=> {
 });
 
 describe('post /body', function () {
-    it('should get param by body', function (done) {
+    it('should get parameter by body', (done)=> {
         request
             .post('/user')
             .send({name: 'dudu'})
@@ -65,5 +65,21 @@ describe('post /body', function () {
                     done();
                 }
             })
+    });
+});
+
+describe('post /json', function () {
+    it('should get parameter by json', (done)=> {
+        request
+            .post('/json')
+            .send({'name': 'dodo'})
+            .expect({'name': 'dodo'})
+            .end((err, res)=> {
+                if (err) {
+                    done(err);
+                } else {
+                    done();
+                }
+            });
     });
 });
