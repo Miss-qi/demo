@@ -51,3 +51,19 @@ describe('post /header', ()=> {
             });
     });
 });
+
+describe('post /body', function () {
+    it('should get param by body', function (done) {
+        request
+            .post('/user')
+            .send({name: 'dudu'})
+            .expect('dudu')
+            .end((err, res) => {
+                if (err) {
+                    done.fail(err);
+                } else {
+                    done();
+                }
+            })
+    });
+});
