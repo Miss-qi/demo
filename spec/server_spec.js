@@ -5,6 +5,13 @@
 const supertest = require('supertest');
 const app = require('../src/server');
 const request = supertest(app);
+function tobeTest(err, done) {
+    if (err) {
+        done.fail(err);
+    } else {
+        done();
+    }
+}
 describe('get /query', ()=> {
     it('should get parameter by query', (done) => {
         request
@@ -12,11 +19,7 @@ describe('get /query', ()=> {
             .query({name: 'Tom'})
             .expect('Tom')
             .end((err, res) => {
-                if (err) {
-                    done.fail(err);
-                } else {
-                    done();
-                }
+                tobeTest(err, done);
             });
     });
 });
@@ -27,11 +30,7 @@ describe('get /params', ()=> {
             .get('/params/Tom')
             .expect({name: 'Tom'})
             .end((err, res)=> {
-                if (err) {
-                    done.fail(err);
-                } else {
-                    done();
-                }
+                tobeTest(err, done);
             });
     });
 });
@@ -43,11 +42,7 @@ describe('post /header', ()=> {
             .set({name: 'jan'})
             .expect('jan')
             .end((err, res)=> {
-                if (err) {
-                    done.fail(err);
-                } else {
-                    done();
-                }
+                tobeTest(err, done);
             });
     });
 });
@@ -59,11 +54,7 @@ describe('post /body', function () {
             .send({name: 'dudu'})
             .expect('dudu')
             .end((err, res) => {
-                if (err) {
-                    done.fail(err);
-                } else {
-                    done();
-                }
+                tobeTest(err, done);
             })
     });
 });
@@ -75,11 +66,7 @@ describe('post /json', function () {
             .send({'name': 'dodo'})
             .expect({'name': 'dodo'})
             .end((err, res)=> {
-                if (err) {
-                    done(err);
-                } else {
-                    done();
-                }
+                tobeTest(err, done);
             });
     });
 });
